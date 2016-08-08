@@ -1,9 +1,44 @@
 {% import "macros.html" as macros %}
 {% extends "base.html" %}
 {% block content %}
-
+<form method="GET" action= '{{url_for('entries')}}'>
+    Entries per page: 
+    <select class = "form-control" max=50 name = "limit" id="limit" onchange='this.form.submit()'>
+        <option value = "5"> 5</option>
+        <option selected value ="10">10</option>
+        <option value = "15">15</option>
+        <option value = "20">20</option>
+    </select>
+</form>
 {% for entry in entries %}
-{{ macros.render_entry(entry) }}
+{{ macros.render_entry(entry, name) }}
 {% endfor %}
+
+<ul class="pager">
+    {% if has_next %}
+    <li class="previous" >
+    <a href="{{ url_for('entries', page=page + 1) }}">&larr; Older</a>
+    </li>
+    {% endif %}
+    {% if has_prev %}
+    <li class="next">
+    <a href="{{ url_for('entries', page=page - 1) }}">&rarr; Newer</a>
+    </li>
+    {% endif %}
+</ul>
+
+{%if authenticate%}
+<center>
+<li style="list-style-type: none;">
+<a href="{{ url_for('add_entry_get') }}"><button type="button" style="width:90px;height:40px;"><font face="Times New Roman"><b>Add Entry</b></font></button></a>
+<a href="{{ url_for('logout') }}"><button type="button" style="width:90px;height:40px;"><font face="Times New Roman"><b>Logout</b></font></button>
+</li>
+</center>
+
+{%else%}
+<center>
+<a href="{{ url_for('login_get') }}"><button type="button" style="width:90px;height:40px;"><font face="Times New Roman">Login</font></button></a>
+</center>
+{%endif%}
 
 {% endblock %}

@@ -1,0 +1,18 @@
+{%extends "base.html" %}
+
+{% block content %}
+<p>
+    Edit Entry
+</p>
+
+<form role="form" method="POST">
+    <h1 class="form-group">
+        <label for="title">{{entry.title}}</label>
+    </h1>
+    <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" name="content" placeholder="Entry content" rows="20" required>{{entry.content}}</textarea>
+    </div>
+    <button type="update" class="btn btn-default">Update</button>
+</form>
+{% endblock %}

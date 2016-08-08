@@ -1,0 +1,15 @@
+{%extends "base.html" %}
+
+{% block content %}
+<p>
+    Are you sure you want to delete "{{entry.title}}"?
+</p>
+<form role="form" method="POST">
+    <body>
+        <a href="{{url_for('entries')}}">
+            <button type="button" class="btn btn-default">Cancel</button>
+        </a>
+        <button type="submit" class="btn btn-default" >Confirm</button>
+    </body>
+</form>
+{% endblock %}
